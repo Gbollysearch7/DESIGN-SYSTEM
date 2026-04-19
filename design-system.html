@@ -195,6 +195,35 @@ nav{
 }
 .token-table td:first-child{color:var(--text);font-weight:600;}
 .token-swatch{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:middle;margin-right:8px;}
+
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;}
+.mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;z-index:99;background:rgba(6,8,12,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);flex-direction:column;padding:16px;gap:4px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--muted);font-size:14px;font-weight:600;padding:12px 16px;border-radius:10px;text-decoration:none;}
+.mobile-menu a.active{color:var(--blue);}
+.mobile-menu .m-cta{background:var(--blue);color:#fff !important;text-align:center;margin-top:8px;border-radius:10px;}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:0 16px;height:56px;}
+  .nav-links{display:none;}
+  .nav-cta{display:none;}
+  .hamburger{display:flex;}
+  .page{padding:80px 16px 60px;}
+  .page-header-title{font-size:40px;letter-spacing:-1.5px;}
+  .comp-grid{grid-template-columns:1fr;}
+  .swatch-grid{gap:14px;}
+  .swatch,.swatch-block{width:110px;}
+  .swatch-block{height:72px;}
+  .btn-row{flex-direction:column;align-items:stretch;}
+  .btn-primary,.btn-ghost,.btn-orange{text-align:center;}
+  .logo-grid{flex-direction:column;}
+  .token-table{font-size:11px;}
+  .token-table th,.token-table td{padding:8px 10px;}
+  div[style*="grid-template-columns:1fr 1fr 1fr"]{display:flex;flex-direction:column;gap:16px;}
+}
 </style>
 </head>
 <body>
@@ -209,7 +238,16 @@ nav{
     <a href="ads.html">Ad Gallery</a>
   </div>
   <a href="pricing.html" class="nav-cta">View All Challenges →</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="pricing.html">Pricing Cards</a>
+  <a href="design-system.html" class="active">Design System</a>
+  <a href="ad-angles.html">Ad Angles</a>
+  <a href="ads.html">Ad Gallery</a>
+  <a href="pricing.html" class="m-cta">View All Challenges →</a>
+</div>
 
 <div class="page">
 
@@ -469,5 +507,6 @@ nav{
   </div>
 
 </div>
+<script>function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}</script>
 </body>
 </html>
