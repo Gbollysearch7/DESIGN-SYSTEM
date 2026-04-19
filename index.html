@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradersYard — GTM Hub</title>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@300,400,500,600,700&display=swap">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --blue:#4250EB;--blue-dark:#2E3A8A;--orange:#F97316;
+  --bg:#06080C;--card:rgba(255,255,255,0.03);
+  --card-blue:rgba(66,80,235,0.07);--card-orange:rgba(249,115,22,0.07);
+  --border:rgba(255,255,255,0.07);--border-blue:rgba(66,80,235,0.28);
+  --border-org:rgba(249,115,22,0.28);
+  --text:#F0F2F5;--muted:#8892A2;--dim:#4A5568;
+  --font:'Clash Display',sans-serif;
+}
+body{background:var(--bg);font-family:var(--font);color:var(--text);min-height:100vh;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(6,8,12,0.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:64px;
+}
+.nav-logo{font-size:20px;font-weight:700;letter-spacing:-0.5px;}
+.nav-logo span{color:var(--blue);}
+.nav-links{display:flex;gap:4px;}
+.nav-links a{
+  color:var(--muted);font-size:13px;font-weight:600;
+  padding:8px 16px;border-radius:8px;text-decoration:none;
+  transition:all 0.15s;letter-spacing:0.2px;
+}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.05);}
+.nav-links a.active{color:var(--text);background:rgba(66,80,235,0.12);color:var(--blue);}
+.nav-cta{
+  background:var(--blue);color:#fff;
+  font-size:13px;font-weight:700;letter-spacing:0.5px;
+  padding:10px 20px;border-radius:10px;text-decoration:none;
+  transition:opacity 0.15s;
+}
+.nav-cta:hover{opacity:0.85;}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:120px 48px 80px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-200px;left:50%;
+  transform:translateX(-50%);
+  width:1000px;height:700px;
+  background:radial-gradient(ellipse,rgba(66,80,235,0.2) 0%,rgba(66,80,235,0.06) 40%,transparent 70%);
+  pointer-events:none;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(66,80,235,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(66,80,235,0.04) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none;
+}
+.hero-eyebrow{
+  display:inline-block;font-size:11px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--blue);border:1px solid var(--border-blue);
+  padding:8px 20px;border-radius:100px;margin-bottom:32px;
+  background:var(--card-blue);
+}
+.hero-title{
+  font-size:clamp(52px,8vw,100px);font-weight:700;
+  letter-spacing:-4px;line-height:0.9;margin-bottom:24px;
+}
+.hero-title span{color:var(--blue);}
+.hero-sub{
+  font-size:18px;color:var(--muted);max-width:560px;
+  line-height:1.6;margin-bottom:48px;
+}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{
+  background:var(--blue);color:#fff;
+  font-family:var(--font);font-size:14px;font-weight:700;
+  padding:16px 32px;border-radius:12px;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:opacity 0.15s;letter-spacing:0.3px;
+}
+.btn-primary:hover{opacity:0.85;}
+.btn-ghost{
+  background:transparent;color:var(--text);
+  font-family:var(--font);font-size:14px;font-weight:600;
+  padding:16px 32px;border-radius:12px;
+  text-decoration:none;border:1px solid var(--border);
+  cursor:pointer;transition:all 0.15s;
+}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue);}
+.hero-stats{
+  display:flex;gap:48px;justify-content:center;
+  margin-top:64px;padding-top:48px;
+  border-top:1px solid var(--border);flex-wrap:wrap;
+}
+.stat-item{text-align:center;}
+.stat-num{font-size:36px;font-weight:700;letter-spacing:-1.5px;color:var(--blue);}
+.stat-label{font-size:12px;color:var(--muted);margin-top:4px;letter-spacing:0.5px;}
+
+/* ── ANGLES SECTION ── */
+.section{padding:80px 48px;max-width:1400px;margin:0 auto;}
+.section-tag{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--dim);
+  border-bottom:1px solid var(--border);
+  padding-bottom:14px;margin-bottom:48px;
+}
+.section-tag.blue{color:var(--blue);border-color:var(--border-blue);}
+.section-tag.orange{color:var(--orange);border-color:var(--border-org);}
+
+/* ANGLE CARDS */
+.angle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.angle-card{
+  background:var(--card-blue);border:1px solid var(--border-blue);
+  border-radius:18px;padding:32px 28px;
+  position:relative;overflow:hidden;
+  transition:transform 0.15s;
+}
+.angle-card:hover{transform:translateY(-3px);}
+.angle-card.orange{background:var(--card-orange);border-color:var(--border-org);}
+.angle-num{
+  font-size:10px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--dim);margin-bottom:16px;
+}
+.angle-headline{
+  font-size:28px;font-weight:700;letter-spacing:-1px;
+  line-height:1.05;margin-bottom:14px;
+}
+.angle-headline.blue{color:var(--blue);}
+.angle-headline.orange{color:var(--orange);}
+.angle-body{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px;}
+.angle-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.angle-tag{
+  font-size:10px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;padding:5px 12px;
+  border-radius:100px;
+}
+.angle-tag.blue{background:rgba(66,80,235,0.15);color:var(--blue);}
+.angle-tag.orange{background:rgba(249,115,22,0.15);color:var(--orange);}
+.angle-tag.green{background:rgba(34,197,94,0.12);color:#22c55e;}
+
+/* ── COPY TOAST ── */
+#toast{
+  position:fixed;bottom:32px;right:32px;
+  background:var(--blue);color:#fff;
+  font-family:var(--font);font-size:13px;font-weight:600;
+  padding:12px 24px;border-radius:10px;
+  opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:9999;
+}
+#toast.show{opacity:1;}
+
+/* ── FULL-WIDTH DIVIDER ── */
+.divider{height:1px;background:var(--border);margin:0 48px;}
+</style>
+</head>
+<body>
+
+<div id="toast">Copied to clipboard</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Traders<span>Yard</span></div>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="pricing.html">Pricing Cards</a>
+    <a href="design-system.html">Design System</a>
+    <a href="ad-angles.html">Ad Angles</a>
+    <a href="ads.html">Ad Gallery</a>
+  </div>
+  <a href="pricing.html" class="nav-cta">View All Challenges →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-eyebrow">GTM Command Hub · 2026</div>
+  <h1 class="hero-title">Build Your<br><span>Trading Yard</span></h1>
+  <p class="hero-sub">Every challenge. Every rule. Every angle. One place for the team to work from.</p>
+  <div class="hero-btns">
+    <a href="pricing.html" class="btn-primary">View All Pricing Cards</a>
+    <a href="ad-angles.html" class="btn-ghost">Ad Angles & Copy</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-num">$8</div><div class="stat-label">Cheapest Challenge</div></div>
+    <div class="stat-item"><div class="stat-num">20K+</div><div class="stat-label">Active Traders</div></div>
+    <div class="stat-item"><div class="stat-num">4.5/5</div><div class="stat-label">Trustpilot</div></div>
+    <div class="stat-item"><div class="stat-num">$300K</div><div class="stat-label">Max Capital</div></div>
+    <div class="stat-item"><div class="stat-num">48hr</div><div class="stat-label">Payout Guarantee</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- QUICK ANGLE TEASERS -->
+<div class="section">
+  <div class="section-tag blue">Top Ad Angles — Quick Reference</div>
+  <div class="angle-grid">
+
+    <div class="angle-card">
+      <div class="angle-num">Angle 01</div>
+      <div class="angle-headline blue">The Ball Is In Your Court</div>
+      <div class="angle-body">You pick the account. You set the rules. You decide the payout speed. Nobody tells you how to trade here.</div>
+      <div class="angle-tags">
+        <span class="angle-tag blue">Autonomy</span>
+        <span class="angle-tag blue">Cold Traffic</span>
+      </div>
+    </div>
+
+    <div class="angle-card">
+      <div class="angle-num">Angle 02</div>
+      <div class="angle-headline blue">Build Your Challenge</div>
+      <div class="angle-body">Start from $8. Choose your size, set your target, pick your payout speed. The configurator adjusts the price live as you go.</div>
+      <div class="angle-tags">
+        <span class="angle-tag blue">Product Feature</span>
+        <span class="angle-tag green">$8 Hook</span>
+      </div>
+    </div>
+
+    <div class="angle-card">
+      <div class="angle-num">Angle 03</div>
+      <div class="angle-headline blue">Tweak The Rules</div>
+      <div class="angle-body">Raise your profit target. Drop your price. Toggle news trading. Remove the consistency rule. Every tweak changes your fee in real time.</div>
+      <div class="angle-tags">
+        <span class="angle-tag blue">Configurator</span>
+        <span class="angle-tag blue">Warm Traffic</span>
+      </div>
+    </div>
+
+    <div class="angle-card orange">
+      <div class="angle-num">Angle 04</div>
+      <div class="angle-headline orange">Make It Harder. Pay Less.</div>
+      <div class="angle-body">Higher profit target = cheaper challenge. It's counterintuitive. It's true. The harder you go, the less you pay.</div>
+      <div class="angle-tags">
+        <span class="angle-tag orange">Curiosity</span>
+        <span class="angle-tag orange">Scroll Stopper</span>
+      </div>
+    </div>
+
+    <div class="angle-card orange">
+      <div class="angle-num">Angle 05</div>
+      <div class="angle-headline orange">Don't Like The Rules? Change Them.</div>
+      <div class="angle-body">No other prop firm lets you do this. Toggle consistency on or off. Raise or lower your drawdown. Go 1-Step or 2-Step.</div>
+      <div class="angle-tags">
+        <span class="angle-tag orange">Disruption</span>
+        <span class="angle-tag orange">Competitor</span>
+      </div>
+    </div>
+
+    <div class="angle-card">
+      <div class="angle-num">Angle 06</div>
+      <div class="angle-headline blue">You Are In Charge</div>
+      <div class="angle-body">Set your own rules. Pick your account. Build your challenge from $8. No other prop firm gives you this level of control.</div>
+      <div class="angle-tags">
+        <span class="angle-tag blue">Control</span>
+        <span class="angle-tag green">$8 Entry</span>
+      </div>
+    </div>
+
+  </div>
+  <div style="margin-top:32px;text-align:center;">
+    <a href="ad-angles.html" class="btn-primary">See All 25+ Ad Angles →</a>
+  </div>
+</div>
+
+<script>
+function showToast(){
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
+}
+</script>
+</body>
+</html>

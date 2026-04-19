@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradersYard — Ad Angles & Copy Bank</title>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@300,400,500,600,700&display=swap">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --blue:#4250EB;--orange:#F97316;--bg:#06080C;
+  --card:rgba(255,255,255,0.03);--card-blue:rgba(66,80,235,0.07);--card-orange:rgba(249,115,22,0.07);
+  --border:rgba(255,255,255,0.07);--border-blue:rgba(66,80,235,0.28);--border-org:rgba(249,115,22,0.28);
+  --text:#F0F2F5;--muted:#8892A2;--dim:#4A5568;--font:'Clash Display',sans-serif;
+}
+body{background:var(--bg);font-family:var(--font);color:var(--text);min-height:100vh;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,12,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;}
+.nav-logo{font-size:20px;font-weight:700;}.nav-logo span{color:var(--blue);}
+.nav-links{display:flex;gap:4px;}
+.nav-links a{color:var(--muted);font-size:13px;font-weight:600;padding:8px 16px;border-radius:8px;text-decoration:none;transition:all 0.15s;}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.05);}
+.nav-links a.active{background:rgba(66,80,235,0.12);color:var(--blue);}
+.nav-cta{background:var(--blue);color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:10px;text-decoration:none;}
+
+.page{padding:100px 48px 100px;max-width:1440px;margin:0 auto;}
+.page-title{font-size:48px;font-weight:700;letter-spacing:-2px;margin-bottom:10px;}
+.page-title span{color:var(--blue);}
+.page-sub{font-size:14px;color:var(--muted);margin-bottom:64px;}
+
+.section{margin-bottom:72px;}
+.section-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:36px;}
+.section-label.blue{color:var(--blue);border-color:var(--border-blue);}
+.section-label.orange{color:var(--orange);border-color:var(--border-org);}
+.section-label.green{color:#22c55e;border-color:rgba(34,197,94,0.3);}
+
+/* ANGLE CARDS */
+.angle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.angle-card{background:var(--card-blue);border:1px solid var(--border-blue);border-radius:18px;padding:28px 24px 22px;display:flex;flex-direction:column;transition:transform 0.15s;}
+.angle-card:hover{transform:translateY(-2px);}
+.angle-card.orange{background:var(--card-orange);border-color:var(--border-org);}
+.angle-card.green{background:rgba(34,197,94,0.05);border-color:rgba(34,197,94,0.25);}
+.angle-num{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
+.angle-headline{font-size:24px;font-weight:700;letter-spacing:-0.8px;line-height:1.1;margin-bottom:12px;}
+.angle-headline.blue{color:var(--blue);}
+.angle-headline.orange{color:var(--orange);}
+.angle-headline.green{color:#22c55e;}
+.angle-hook{font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px;line-height:1.4;}
+.angle-body{font-size:12px;color:var(--muted);line-height:1.7;flex:1;margin-bottom:16px;}
+.angle-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.atag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:100px;}
+.atag.blue{background:rgba(66,80,235,0.15);color:var(--blue);}
+.atag.orange{background:rgba(249,115,22,0.15);color:var(--orange);}
+.atag.green{background:rgba(34,197,94,0.12);color:#22c55e;}
+.atag.red{background:rgba(248,113,113,0.12);color:#f87171;}
+.copy-btn{width:100%;padding:10px;border-radius:10px;border:none;font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:opacity 0.15s;}
+.copy-btn.blue{background:rgba(66,80,235,0.18);color:var(--blue);}
+.copy-btn.orange{background:rgba(249,115,22,0.18);color:var(--orange);}
+.copy-btn.green{background:rgba(34,197,94,0.12);color:#22c55e;}
+.copy-btn:hover{opacity:0.7;}
+
+/* COPY BANK */
+.copy-bank{display:flex;flex-direction:column;gap:12px;}
+.copy-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;}
+.copy-item:hover{border-color:var(--border-blue);}
+.copy-text{font-size:14px;line-height:1.6;flex:1;}
+.copy-text strong{color:var(--blue);}
+.copy-text.orange strong{color:var(--orange);}
+.copy-text.green strong{color:#22c55e;}
+.mini-copy{
+  flex-shrink:0;padding:8px 14px;border-radius:8px;border:none;
+  font-family:var(--font);font-size:10px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:opacity 0.15s;
+  white-space:nowrap;
+}
+.mini-copy.blue{background:rgba(66,80,235,0.15);color:var(--blue);}
+.mini-copy.orange{background:rgba(249,115,22,0.15);color:var(--orange);}
+.mini-copy.green{background:rgba(34,197,94,0.12);color:#22c55e;}
+.mini-copy:hover{opacity:0.65;}
+
+/* $8 HERO BANNER */
+.eight-banner{
+  background:linear-gradient(135deg,rgba(66,80,235,0.15),rgba(66,80,235,0.05));
+  border:1px solid var(--border-blue);
+  border-radius:20px;padding:40px 48px;margin-bottom:48px;
+  display:flex;align-items:center;justify-content:space-between;gap:32px;
+}
+.eight-num{font-size:120px;font-weight:700;letter-spacing:-6px;line-height:1;color:var(--blue);}
+.eight-content{flex:1;}
+.eight-title{font-size:32px;font-weight:700;letter-spacing:-1px;margin-bottom:12px;}
+.eight-body{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px;}
+.eight-pills{display:flex;gap:10px;flex-wrap:wrap;}
+.eight-pill{font-size:12px;font-weight:600;padding:6px 14px;border-radius:100px;background:rgba(66,80,235,0.12);border:1px solid var(--border-blue);color:var(--text);}
+
+#toast{position:fixed;bottom:32px;right:32px;background:var(--blue);color:#fff;font-family:var(--font);font-size:13px;font-weight:600;padding:12px 24px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:9999;}
+#toast.show{opacity:1;}
+</style>
+</head>
+<body>
+<div id="toast">Copied!</div>
+
+<nav>
+  <div class="nav-logo">Traders<span>Yard</span></div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="pricing.html">Pricing Cards</a>
+    <a href="design-system.html">Design System</a>
+    <a href="ad-angles.html" class="active">Ad Angles</a>
+    <a href="ads.html">Ad Gallery</a>
+  </div>
+  <a href="pricing.html" class="nav-cta">Pricing Cards →</a>
+</nav>
+
+<div class="page">
+  <div class="page-title">Ad Angles & <span>Copy Bank</span></div>
+  <div class="page-sub">Every angle. Every headline. Full copy for graphic designers and copywriters. One click to copy.</div>
+
+  <!-- $8 BANNER -->
+  <div class="eight-banner">
+    <div class="eight-num">$8</div>
+    <div class="eight-content">
+      <div class="eight-title">The cheapest prop firm challenge on the market.</div>
+      <div class="eight-body">Stack every available discount: 2-Step $2,500 account + 30-day payout + 1:30 leverage + 12% profit target + 6-day minimum trading days. The result: a fully real prop challenge for $8. This is a verified angle — use it aggressively in acquisition campaigns.</div>
+      <div class="eight-pills">
+        <span class="eight-pill">2-Step $2,500</span>
+        <span class="eight-pill">30-Day Payout</span>
+        <span class="eight-pill">1:30 Leverage</span>
+        <span class="eight-pill">12% Profit Target</span>
+        <span class="eight-pill">6 Min. Trading Days</span>
+        <span class="eight-pill">= $8 Challenge</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTROL ANGLES -->
+  <div class="section">
+    <div class="section-label blue">01 / You're In Control — Angles</div>
+    <div class="angle-grid">
+
+      <div class="angle-card">
+        <div class="angle-num">Angle 01</div>
+        <div class="angle-headline blue">The Ball Is In Your Court</div>
+        <div class="angle-hook">"Pick your size. Set your terms. Get funded."</div>
+        <div class="angle-body">No other prop firm hands control back to the trader like TradersYard. The account size, the rules, the payout speed — every decision is yours. Use for cold traffic, top of funnel. High curiosity angle.</div>
+        <div class="angle-tags"><span class="atag blue">Cold Traffic</span><span class="atag blue">Autonomy</span><span class="atag blue">Top of Funnel</span></div>
+        <button class="copy-btn blue" onclick="copyText('The ball is in your court.\n\nPick your size. Set your terms. Get funded.\n\nAt TradersYard, every rule is yours to choose. Profit target, leverage, payout speed — you decide. From $19.\n\ntradersyard.com')">Copy Full Copy</button>
+      </div>
+
+      <div class="angle-card">
+        <div class="angle-num">Angle 02</div>
+        <div class="angle-headline blue">You Are In Charge</div>
+        <div class="angle-hook">"Set your own rules. Pick your account. Build your challenge."</div>
+        <div class="angle-body">Direct empowerment angle. Works across all formats — static ads, stories, UGC scripts. No fluff, just authority. Best for audiences who've been burned by rigid prop firms.</div>
+        <div class="angle-tags"><span class="atag blue">Empowerment</span><span class="atag blue">All Formats</span><span class="atag blue">Retargeting</span></div>
+        <button class="copy-btn blue" onclick="copyText('You are in charge.\n\nSet your own rules. Pick your account. Build your challenge.\n\nAdjust every setting. Watch the price change live. Start from $8.\n\ntradersyard.com')">Copy Full Copy</button>
+      </div>
+
+      <div class="angle-card">
+        <div class="angle-num">Angle 03</div>
+        <div class="angle-headline blue">Build Your Own Way</div>
+        <div class="angle-hook">"FX or Futures. 1-Step or 2-Step. Your rules, your account."</div>
+        <div class="angle-body">Breadth angle — highlights how many genuine options exist. Works well as a comparison against competitors who offer one fixed product. Show the range.</div>
+        <div class="angle-tags"><span class="atag blue">Breadth</span><span class="atag blue">Comparison</span><span class="atag blue">Stories</span></div>
+        <button class="copy-btn blue" onclick="copyText('Build your own way.\n\nFX or Futures. 1-Step or 2-Step. $2,500 or $150,000. 1:75 leverage or 1:30. 15-day payouts or 30.\n\nEvery combination. One platform. Start from $8.\n\ntradersyard.com')">Copy Full Copy</button>
+      </div>
+
+      <div class="angle-card">
+        <div class="angle-num">Angle 04</div>
+        <div class="angle-headline blue">Build Your Challenge</div>
+        <div class="angle-hook">"Choose your account. Set your profit target. Pick your payout speed."</div>
+        <div class="angle-body">Product feature angle — drives people to the configurator. Best for warm audiences who already know what a prop challenge is. Pairs perfectly with a demo-style video.</div>
+        <div class="angle-tags"><span class="atag blue">Product Feature</span><span class="atag blue">Warm Traffic</span><span class="atag green">$8 Hook</span></div>
+        <button class="copy-btn blue" onclick="copyText('Build your challenge.\n\nChoose your account size. Set your profit target. Pick your payout speed.\n\nThe configurator adjusts your price in real time. Start from $8.\n\ntradersyard.com')">Copy Full Copy</button>
+      </div>
+
+      <div class="angle-card">
+        <div class="angle-num">Angle 05</div>
+        <div class="angle-headline blue">No One Size Fits All</div>
+        <div class="angle-hook">"FX from $2,500. Futures from $25,000. Up to $300K capital. You choose."</div>
+        <div class="angle-body">Anti-generic angle. Direct shot at prop firms with one product. Highlights the range without being salesy. Works in both graphic and UGC formats.</div>
+        <div class="angle-tags"><span class="atag blue">Anti-Generic</span><span class="atag blue">Range</span><span class="atag blue">Stories</span></div>
+        <button class="copy-btn blue" onclick="copyText('No one size fits all.\n\nFX from $2,500. Futures from $25,000. Up to $300K simulated capital. 1-Step or 2-Step.\n\nAt TradersYard, you choose everything.\n\ntradersyard.com')">Copy Full Copy</button>
+      </div>
+
+      <div class="angle-card">
+        <div class="angle-num">Angle 06</div>
+        <div class="angle-headline blue">Your Yard. Your Speed. Your Call.</div>
+        <div class="angle-hook">"Choose 10-day or 15-day payouts. FX or Futures. Start when you're ready."</div>
+        <div class="angle-body">Pacing angle — removes urgency pressure while still showing flexibility. Good for traders who feel rushed by other firms. Calm, confident tone.</div>
+        <div class="angle-tags"><span class="atag blue">Pacing</span><span class="atag blue">Calm Tone</span><span class="atag blue">Stories</span></div>
+        <button class="copy-btn blue" onclick="copyText('Your yard. Your speed. Your call.\n\nChoose 15-day or 30-day payouts. Pick FX or Futures. Start when you are ready.\n\nTradersYard gives you the wheel.\n\ntradersyard.com')">Copy Full Copy</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RULE TWEAK ANGLES -->
+  <div class="section">
+    <div class="section-label orange">02 / Tweak The Rules — Angles</div>
+    <div class="angle-grid">
+
+      <div class="angle-card orange">
+        <div class="angle-num">Angle 07</div>
+        <div class="angle-headline orange">Tweak The Rules</div>
+        <div class="angle-hook">"Adjust your profit target. Toggle news trading. Choose your leverage."</div>
+        <div class="angle-body">Configurator feature angle. Shows the live price update mechanic — nobody else does this. Great for video ads where you screen-record the configurator adjusting in real time.</div>
+        <div class="angle-tags"><span class="atag orange">Configurator</span><span class="atag orange">Video Ads</span><span class="atag orange">Feature</span></div>
+        <button class="copy-btn orange" onclick="copyText('Tweak the rules.\n\nAdjust your profit target. Toggle news trading on or off. Choose 1:75 or 1:30 leverage. Watch the price update live.\n\nThis is your challenge. Build it your way.\n\ntradersyard.com')">Copy Full Copy</button>
+      </div>
+
+      <div class="angle-card orange">
+        <div class="angle-num">Angle 08</div>
+        <div class="angle-headline orange">Don't Like The Rules? Change Them.</div>
+        <div class="angle-hook">"Toggle consistency on or off. Raise or lower your target. This is your challenge."</div>
+        <div class="angle-body">Disruption angle. Provocative. Challenges the assumption that prop firms are rigid. High scroll-stop rate. Works best as a bold typographic graphic or UGC opening hook.</div>
+        <div class="angle-tags"><span class="atag orange">Disruption</span><span class="atag orange">Scroll Stopper</span><span class="atag orange">Cold Traffic</span></div>
+        <button class="copy-btn orange" onclick="copyText("Don't like the rules? Change them.\n\nToggle consistency on or off. Raise or lower your profit target. Go 1-Step or 2-Step.\n\nAt TradersYard, you design the challenge. From $8.\n\ntradersyard.com")">Copy Full Copy</button>
+      </div>
+
+      <div class="angle-card orange">
+        <div class="angle-num">Angle 09</div>
+        <div class="angle-headline orange">What Would You Change?</div>
+        <div class="angle-hook">"Profit target? Leverage? Payout speed? At TradersYard, you decide. All of it."</div>
+        <div class="angle-body">Curiosity hook. Asks a question the viewer has never been asked before. Opens a loop in the brain. Use as an opening line in UGC scripts or the first frame of a video ad.</div>
+        <div class="angle-tags"><span class="atag orange">Curiosity</span><span class="atag orange">UGC Script</span><span class="atag orange">Video Hook</span></div>
+        <button class="copy-btn orange" onclick="copyText('What would you change about your challenge?\n\nProfit target? Leverage? Payout speed? Consistency rule?\n\nAt TradersYard, you decide. All of it. Build your challenge from $8.\n\ntradersyard.com')">Copy Full Copy</button>
+      </div>
+
+      <div class="angle-card orange">
+        <div class="angle-num">Angle 10</div>
+        <div class="angle-headline orange">Make It Harder. Pay Less.</div>
+        <div class="angle-hook">"Raise your profit target. Drop your price. You control the difficulty."</div>
+        <div class="angle-body">Counterintuitive angle — high CTR because it breaks pattern. The harder the challenge you set, the cheaper it gets. Confident traders love this. Works for experienced audiences.</div>
+        <div class="angle-tags"><span class="atag orange">Counterintuitive</span><span class="atag orange">Experienced Traders</span><span class="atag orange">High CTR</span></div>
+        <button class="copy-btn orange" onclick="copyText('Make it harder. Pay less.\n\nRaise your profit target to 12% — your fee drops 20%.\n\nAt TradersYard, the harder you go, the less you pay. That is the deal.\n\ntradersyard.com')">Copy Full Copy</button>
+      </div>
+
+      <div class="angle-card orange">
+        <div class="angle-num">Angle 11</div>
+        <div class="angle-headline orange">The Harder You Go. The Less You Pay.</div>
+        <div class="angle-hook">"Higher profit targets unlock lower challenge fees."</div>
+        <div class="angle-body">Visual angle — pair with the up/down arrow graphic (ad25). Explains the pricing mechanic in one line. Great for retargeting people who visited the configurator.</div>
+        <div class="angle-tags"><span class="atag orange">Visual</span><span class="atag orange">Retargeting</span><span class="atag orange">Pricing Mechanic</span></div>
+        <button class="copy-btn orange" onclick="copyText('The harder you go. The less you pay.\n\nSet a 12% profit target instead of 9% — your fee drops by 20%.\n\nThis is how TradersYard works. You are rewarded for ambition.\n\ntradersyard.com')">Copy Full Copy</button>
+      </div>
+
+      <div class="angle-card orange">
+        <div class="angle-num">Angle 12</div>
+        <div class="angle-headline orange">You Set The Terms</div>
+        <div class="angle-hook">"Adjust every rule. See the price update live."</div>
+        <div class="angle-body">Clean product angle — focuses on the live configurator mechanic. Best paired with a video of someone using the configurator on screen. The live price update is the magic moment.</div>
+        <div class="angle-tags"><span class="atag orange">Product Demo</span><span class="atag orange">Video</span><span class="atag orange">Configurator</span></div>
+        <button class="copy-btn orange" onclick="copyText('You set the terms.\n\nAdjust every rule. Watch the price update live. No other prop firm does this.\n\nBuild your challenge from $8 at TradersYard.\n\ntradersyard.com')">Copy Full Copy</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- $8 ANGLES -->
+  <div class="section">
+    <div class="section-label green">03 / The $8 Challenge — Angles</div>
+    <div class="angle-grid">
+
+      <div class="angle-card green">
+        <div class="angle-num">Angle 13</div>
+        <div class="angle-headline green">$8 Prop Challenge. Real.</div>
+        <div class="angle-hook">"Not a trial. Not a demo. A real prop firm challenge for $8."</div>
+        <div class="angle-body">Direct price shock angle. The $8 figure will stop anyone who knows what prop firms cost. Lead with the number. Explain after. Works on anyone who has ever paid $100+ for a prop challenge.</div>
+        <div class="angle-tags"><span class="atag green">Price Shock</span><span class="atag green">Cold Traffic</span><span class="atag green">Acquisition</span></div>
+        <button class="copy-btn green" onclick="copyText('$8 prop challenge. Real.\n\nNot a trial. Not a demo. A fully real prop firm challenge — verified by live trading on real market conditions.\n\nStack the right rules at TradersYard and pay as little as $8.\n\ntradersyard.com')">Copy Full Copy</button>
+      </div>
+
+      <div class="angle-card green">
+        <div class="angle-num">Angle 14</div>
+        <div class="angle-headline green">I Paid $8. Got Funded.</div>
+        <div class="angle-hook">"2-Step $2,500. 30-day payout. 1:30 leverage. 12% target. $8."</div>
+        <div class="angle-body">First-person UGC hook. Sounds unbelievable — which makes it scroll-stopping. Perfect as a UGC creator opening line. Follow with the configurator breakdown to show how.</div>
+        <div class="angle-tags"><span class="atag green">UGC</span><span class="atag green">First Person</span><span class="atag green">Unbelievable Hook</span></div>
+        <button class="copy-btn green" onclick="copyText('I paid $8 and got funded.\n\n2-Step $2,500 account. 30-day payout. 1:30 leverage. 12% profit target. That combination at TradersYard costs $8.\n\nI passed. Got my funded account. This is real.\n\ntradersyard.com')">Copy Full Copy</button>
+      </div>
+
+      <div class="angle-card green">
+        <div class="angle-num">Angle 15</div>
+        <div class="angle-headline green">The Cheapest Prop Challenge Exists.</div>
+        <div class="angle-hook">"$8. Fully verified. TradersYard."</div>
+        <div class="angle-body">Authority claim angle. State it as fact. Invites disbelief, which drives clicks. Works well as a Twitter/X thread starter or a bold graphic with no other text.</div>
+        <div class="angle-tags"><span class="atag green">Authority Claim</span><span class="atag green">Twitter/X</span><span class="atag green">Disbelief Hook</span></div>
+        <button class="copy-btn green" onclick="copyText('The cheapest prop firm challenge exists.\n\n$8. Fully verified. Live market conditions. Real funded account if you pass.\n\nTradersYard. Build your challenge from $8.\n\ntradersyard.com')">Copy Full Copy</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COPY BANK -->
+  <div class="section">
+    <div class="section-label blue">04 / Ready-to-Use Copy Lines — One-Click Copy</div>
+    <div class="copy-bank">
+
+      <div class="copy-item"><div class="copy-text"><strong>Headline:</strong> "Where Demo Wins Become Real Rewards"</div><button class="mini-copy blue" onclick="copyText('Where Demo Wins Become Real Rewards')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>Headline:</strong> "Build Your Yard. Trade Your Way."</div><button class="mini-copy blue" onclick="copyText('Build Your Yard. Trade Your Way.')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>Headline:</strong> "The Ball Is In Your Court"</div><button class="mini-copy blue" onclick="copyText('The Ball Is In Your Court')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>Headline:</strong> "You Are In Charge"</div><button class="mini-copy blue" onclick="copyText('You Are In Charge')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>Headline:</strong> "Build Your Own Way"</div><button class="mini-copy blue" onclick="copyText('Build Your Own Way')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>Headline:</strong> "Don't Like The Rules? Change Them."</div><button class="mini-copy orange" onclick="copyText(`Don't Like The Rules? Change Them.`)">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>Headline:</strong> "Tweak The Rules"</div><button class="mini-copy orange" onclick="copyText('Tweak The Rules')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>Headline:</strong> "Make It Harder. Pay Less."</div><button class="mini-copy orange" onclick="copyText('Make It Harder. Pay Less.')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>Headline:</strong> "The Harder You Go. The Less You Pay."</div><button class="mini-copy orange" onclick="copyText('The Harder You Go. The Less You Pay.')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>Headline:</strong> "King Of The Yard. Win a $25K Funded Account Every Week."</div><button class="mini-copy orange" onclick="copyText('King Of The Yard. Win a $25K Funded Account Every Week.')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text copy-text green"><strong>$8 Hook:</strong> "A real prop firm challenge for $8. Not a joke. TradersYard."</div><button class="mini-copy green" onclick="copyText('A real prop firm challenge for $8. Not a joke. TradersYard.')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text copy-text green"><strong>$8 Explainer:</strong> "2-Step $2,500 + 30-day payout + 1:30 leverage + 12% profit target = $8 challenge at TradersYard."</div><button class="mini-copy green" onclick="copyText('2-Step $2,500 + 30-day payout + 1:30 leverage + 12% profit target = $8 challenge at TradersYard.')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>Social Proof:</strong> "20,000+ traders. 4.5/5 on Trustpilot. Payouts in 48 hours or we pay you extra."</div><button class="mini-copy blue" onclick="copyText('20,000+ traders. 4.5/5 on Trustpilot. Payouts in 48 hours or we pay you extra.')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>Profit Split Hook:</strong> "Withdraw $300. Keep $300. 100%. Every time."</div><button class="mini-copy blue" onclick="copyText('Withdraw $300. Keep $300. 100%. Every time.')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>Guarantee Hook:</strong> "Payouts guaranteed in 48 hours. Miss the window — we pay you a bonus."</div><button class="mini-copy blue" onclick="copyText('Payouts guaranteed in 48 hours. Miss the window — we pay you a bonus.')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>Futures Hook:</strong> "Day traders. Futures challenge from $59. 6% profit target. 10-day payouts. Agena Trader."</div><button class="mini-copy orange" onclick="copyText('Day traders. Futures challenge from $59. 6% profit target. 10-day payouts. Agena Trader.')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>Leverage Hook:</strong> "1:75 leverage. Default. No extra cost. Most prop firms cap at 1:30."</div><button class="mini-copy blue" onclick="copyText('1:75 leverage. Default. No extra cost. Most prop firms cap at 1:30.')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>CTA:</strong> "Build your challenge at tradersyard.com"</div><button class="mini-copy blue" onclick="copyText('Build your challenge at tradersyard.com')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>CTA:</strong> "Enter The Arena at tradersyard.com/arena"</div><button class="mini-copy orange" onclick="copyText('Enter The Arena at tradersyard.com/arena')">Copy</button></div>
+      <div class="copy-item"><div class="copy-text"><strong>CTA:</strong> "Get funded. Keep up to 100%. tradersyard.com"</div><button class="mini-copy blue" onclick="copyText('Get funded. Keep up to 100%. tradersyard.com')">Copy</button></div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showToast(){const t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+function copyText(text){navigator.clipboard.writeText(text).then(()=>showToast());}
+</script>
+</body>
+</html>

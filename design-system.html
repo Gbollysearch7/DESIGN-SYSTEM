@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradersYard — Design System</title>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@300,400,500,600,700&display=swap">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --blue:#4250EB;--blue-dark:#2E3A8A;--orange:#F97316;
+  --bg:#06080C;--card:rgba(255,255,255,0.03);
+  --card-blue:rgba(66,80,235,0.07);--card-orange:rgba(249,115,22,0.07);
+  --border:rgba(255,255,255,0.07);--border-blue:rgba(66,80,235,0.28);
+  --border-org:rgba(249,115,22,0.28);
+  --text:#F0F2F5;--muted:#8892A2;--dim:#4A5568;
+  --font:'Clash Display',sans-serif;
+}
+body{background:var(--bg);font-family:var(--font);color:var(--text);min-height:100vh;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(6,8,12,0.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:64px;
+}
+.nav-logo{font-size:20px;font-weight:700;letter-spacing:-0.5px;}
+.nav-logo span{color:var(--blue);}
+.nav-links{display:flex;gap:4px;}
+.nav-links a{
+  color:var(--muted);font-size:13px;font-weight:600;
+  padding:8px 16px;border-radius:8px;text-decoration:none;
+  transition:all 0.15s;letter-spacing:0.2px;
+}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.05);}
+.nav-links a.active{color:var(--blue);background:rgba(66,80,235,0.12);}
+.nav-cta{
+  background:var(--blue);color:#fff;
+  font-size:13px;font-weight:700;letter-spacing:0.5px;
+  padding:10px 20px;border-radius:10px;text-decoration:none;
+  transition:opacity 0.15s;
+}
+.nav-cta:hover{opacity:0.85;}
+
+/* LAYOUT */
+.page{padding:100px 48px 80px;max-width:1400px;margin:0 auto;}
+.section{margin-bottom:72px;}
+.section-tag{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--dim);
+  border-bottom:1px solid var(--border);
+  padding-bottom:14px;margin-bottom:40px;
+}
+.section-tag.blue{color:var(--blue);border-color:var(--border-blue);}
+.section-tag.orange{color:var(--orange);border-color:var(--border-org);}
+
+/* PAGE HEADER */
+.page-header{margin-bottom:72px;padding-bottom:48px;border-bottom:1px solid var(--border);}
+.page-header-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:16px;}
+.page-header-title{font-size:56px;font-weight:700;letter-spacing:-2.5px;line-height:1;}
+.page-header-title span{color:var(--blue);}
+.page-header-meta{font-size:13px;color:var(--muted);margin-top:12px;}
+
+/* COLOR GRID */
+.swatch-grid{display:flex;flex-wrap:wrap;gap:20px;}
+.swatch{width:140px;}
+.swatch-block{width:140px;height:90px;border-radius:14px;border:1px solid rgba(255,255,255,0.06);margin-bottom:10px;}
+.swatch-name{font-size:13px;font-weight:700;margin-bottom:3px;}
+.swatch-hex{font-size:11px;color:var(--muted);letter-spacing:0.5px;font-family:monospace;}
+.swatch-token{font-size:10px;color:var(--dim);letter-spacing:0.3px;margin-top:2px;}
+
+/* TYPOGRAPHY */
+.type-row{margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--border);}
+.type-row:last-child{border-bottom:none;}
+.type-specimen-text{line-height:1.1;}
+.type-meta{font-size:11px;color:var(--dim);margin-top:8px;letter-spacing:0.5px;}
+
+/* COMPONENT GRID */
+.comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.comp-card{
+  background:var(--card-blue);border:1px solid var(--border-blue);
+  border-radius:16px;padding:28px;
+}
+.comp-card.neutral{background:var(--card);border-color:var(--border);}
+.comp-card.orange{background:var(--card-orange);border-color:var(--border-org);}
+.comp-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:20px;}
+
+/* BADGES */
+.badge-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.badge{
+  display:inline-block;font-size:12px;font-weight:700;letter-spacing:2px;
+  padding:9px 22px;border-radius:100px;text-transform:uppercase;
+}
+.badge-blue{background:var(--blue);color:#fff;}
+.badge-orange{background:var(--orange);color:#fff;}
+.badge-ghost-blue{background:transparent;color:var(--blue);border:1.5px solid var(--blue);}
+.badge-ghost-orange{background:transparent;color:var(--orange);border:1.5px solid var(--orange);}
+
+/* PILLS */
+.pill-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.pill{
+  display:inline-block;font-size:16px;font-weight:600;
+  padding:14px 22px;border-radius:12px;white-space:nowrap;
+}
+.pill-default{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);color:var(--text);}
+.pill-blue{background:rgba(66,80,235,0.10);border:1px solid rgba(66,80,235,0.30);color:var(--text);}
+.pill-orange{background:rgba(249,115,22,0.10);border:1px solid rgba(249,115,22,0.30);color:var(--text);}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+.btn-primary{
+  background:var(--blue);color:#fff;font-family:var(--font);
+  font-size:14px;font-weight:700;padding:14px 28px;border-radius:12px;
+  text-decoration:none;border:none;cursor:pointer;letter-spacing:0.3px;
+}
+.btn-ghost{
+  background:transparent;color:var(--text);font-family:var(--font);
+  font-size:14px;font-weight:600;padding:14px 28px;border-radius:12px;
+  text-decoration:none;border:1px solid var(--border);cursor:pointer;
+}
+.btn-orange{
+  background:var(--orange);color:#fff;font-family:var(--font);
+  font-size:14px;font-weight:700;padding:14px 28px;border-radius:12px;
+  text-decoration:none;border:none;cursor:pointer;
+}
+
+/* SPACING SCALE */
+.spacing-grid{display:flex;flex-direction:column;gap:12px;}
+.spacing-row{display:flex;align-items:center;gap:20px;}
+.spacing-bar{background:var(--blue);height:8px;border-radius:4px;opacity:0.7;}
+.spacing-meta{font-size:12px;color:var(--muted);width:120px;flex-shrink:0;}
+
+/* RADIUS SCALE */
+.radius-grid{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end;}
+.radius-demo{background:var(--card-blue);border:1px solid var(--border-blue);width:80px;height:80px;}
+.radius-label{font-size:11px;color:var(--muted);margin-top:8px;text-align:center;}
+
+/* LOGO SECTION */
+.logo-grid{display:flex;gap:24px;flex-wrap:wrap;}
+.logo-box{
+  background:#06080C;border:1px solid var(--border);border-radius:16px;
+  padding:40px 48px;display:flex;align-items:center;justify-content:center;
+}
+.logo-box.blue-bg{background:var(--card-blue);border-color:var(--border-blue);}
+.logo-text{font-size:28px;font-weight:700;letter-spacing:-1px;}
+.logo-text span{color:var(--blue);}
+
+/* GLOW EFFECT DEMO */
+.glow-demo{
+  position:relative;height:160px;border-radius:16px;
+  background:#06080C;overflow:hidden;border:1px solid var(--border);
+}
+.glow-blob{
+  position:absolute;top:-80px;left:50%;transform:translateX(-50%);
+  width:500px;height:300px;
+  background:radial-gradient(ellipse,rgba(66,80,235,0.25) 0%,rgba(66,80,235,0.06) 45%,transparent 70%);
+  pointer-events:none;
+}
+.glow-blob.orange{background:radial-gradient(ellipse,rgba(249,115,22,0.25) 0%,rgba(249,115,22,0.06) 45%,transparent 70%);}
+
+/* GRID TEXTURE DEMO */
+.grid-texture-demo{
+  position:relative;height:120px;border-radius:16px;overflow:hidden;border:1px solid var(--border);
+}
+.grid-texture-demo::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(66,80,235,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(66,80,235,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+
+/* OFFER PANEL DEMO */
+.offer-panel{border-radius:18px;padding:24px 24px 20px;display:flex;flex-direction:column;}
+.offer-panel-blue{background:var(--card-blue);border:1px solid var(--border-blue);}
+.offer-panel-orange{background:var(--card-orange);border:1px solid var(--border-org);}
+.panel-type{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.panel-type.blue{color:var(--blue);}
+.panel-type.orange{color:var(--orange);}
+.panel-hero-num{font-size:64px;font-weight:700;letter-spacing:-3px;line-height:0.9;}
+.panel-hero-label{font-size:26px;font-weight:700;letter-spacing:-0.5px;}
+.panel-hero-label.blue{color:var(--blue);}
+.panel-hero-label.orange{color:var(--orange);}
+
+/* TOKEN TABLE */
+.token-table{width:100%;border-collapse:collapse;}
+.token-table th{
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--dim);text-align:left;padding:10px 16px;
+  border-bottom:1px solid var(--border);
+}
+.token-table td{
+  font-size:12px;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.03);
+  color:var(--muted);font-family:monospace;
+}
+.token-table td:first-child{color:var(--text);font-weight:600;}
+.token-swatch{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:middle;margin-right:8px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Traders<span>Yard</span></div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="pricing.html">Pricing Cards</a>
+    <a href="design-system.html" class="active">Design System</a>
+    <a href="ad-angles.html">Ad Angles</a>
+    <a href="ads.html">Ad Gallery</a>
+  </div>
+  <a href="pricing.html" class="nav-cta">View All Challenges →</a>
+</nav>
+
+<div class="page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-label">Design System</div>
+    <div class="page-header-title">Traders<span>Yard</span></div>
+    <div class="page-header-meta">v1.0 &nbsp;·&nbsp; 2026 &nbsp;·&nbsp; Clash Display &nbsp;·&nbsp; Source of truth for all brand assets</div>
+  </div>
+
+  <!-- 01 LOGO -->
+  <div class="section">
+    <div class="section-tag blue">01 / Logo</div>
+    <div class="logo-grid">
+      <div>
+        <div style="font-size:10px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">On Dark</div>
+        <div class="logo-box">
+          <div class="logo-text">Traders<span>Yard</span></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">On Blue Tint</div>
+        <div class="logo-box blue-bg">
+          <div class="logo-text">Traders<span>Yard</span></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Large</div>
+        <div class="logo-box" style="padding:32px 40px;">
+          <div style="font-size:44px;font-weight:700;letter-spacing:-2px;">Traders<span style="color:var(--blue);">Yard</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 COLORS -->
+  <div class="section">
+    <div class="section-tag blue">02 / Colours</div>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-block" style="background:#4250EB;"></div>
+        <div class="swatch-name">Brand Blue</div>
+        <div class="swatch-hex">#4250EB</div>
+        <div class="swatch-token">--blue</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#2E3A8A;"></div>
+        <div class="swatch-name">Blue Dark</div>
+        <div class="swatch-hex">#2E3A8A</div>
+        <div class="swatch-token">--blue-dark</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#F97316;"></div>
+        <div class="swatch-name">Futures Orange</div>
+        <div class="swatch-hex">#F97316</div>
+        <div class="swatch-token">--orange</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#06080C;border:1px solid rgba(255,255,255,0.12);"></div>
+        <div class="swatch-name">Background</div>
+        <div class="swatch-hex">#06080C</div>
+        <div class="swatch-token">--bg</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#F0F2F5;"></div>
+        <div class="swatch-name">Text Primary</div>
+        <div class="swatch-hex">#F0F2F5</div>
+        <div class="swatch-token">--text</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#8892A2;"></div>
+        <div class="swatch-name">Text Muted</div>
+        <div class="swatch-hex">#8892A2</div>
+        <div class="swatch-token">--muted</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#4A5568;"></div>
+        <div class="swatch-name">Text Dim</div>
+        <div class="swatch-hex">#4A5568</div>
+        <div class="swatch-token">--dim</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:rgba(66,80,235,0.07);border:1px solid rgba(66,80,235,0.28);"></div>
+        <div class="swatch-name">Card Blue</div>
+        <div class="swatch-hex">rgba(66,80,235,0.07)</div>
+        <div class="swatch-token">--card-blue</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:rgba(249,115,22,0.07);border:1px solid rgba(249,115,22,0.28);"></div>
+        <div class="swatch-name">Card Orange</div>
+        <div class="swatch-hex">rgba(249,115,22,0.07)</div>
+        <div class="swatch-token">--card-orange</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 TYPOGRAPHY -->
+  <div class="section">
+    <div class="section-tag blue">03 / Typography — Clash Display</div>
+
+    <div class="type-row">
+      <div class="type-specimen-text" style="font-size:72px;font-weight:700;letter-spacing:-3px;">Display 700</div>
+      <div class="type-meta">72px · Weight 700 · Letter-spacing -3px · Hero headlines</div>
+    </div>
+    <div class="type-row">
+      <div class="type-specimen-text" style="font-size:48px;font-weight:700;letter-spacing:-2px;">Heading 700</div>
+      <div class="type-meta">48px · Weight 700 · Letter-spacing -2px · Section headlines</div>
+    </div>
+    <div class="type-row">
+      <div class="type-specimen-text" style="font-size:32px;font-weight:700;letter-spacing:-1px;">Subheading 700</div>
+      <div class="type-meta">32px · Weight 700 · Letter-spacing -1px · Card titles</div>
+    </div>
+    <div class="type-row">
+      <div class="type-specimen-text" style="font-size:18px;font-weight:500;color:var(--muted);">Body 500 — Every challenge. Every rule. Every angle.</div>
+      <div class="type-meta">18px · Weight 500 · Color: --muted · Body copy</div>
+    </div>
+    <div class="type-row">
+      <div class="type-specimen-text" style="font-size:13px;font-weight:600;color:var(--muted);">Label 600 — ACCOUNT SIZE · CHALLENGE TYPE · FX 2-STEP</div>
+      <div class="type-meta">13px · Weight 600 · All caps · Letter-spacing 2px · Labels</div>
+    </div>
+    <div class="type-row">
+      <div class="type-specimen-text" style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dim);">SECTION EYEBROW TAG</div>
+      <div class="type-meta">11px · Weight 700 · All caps · Letter-spacing 3px · Section tags</div>
+    </div>
+  </div>
+
+  <!-- 04 BUTTONS -->
+  <div class="section">
+    <div class="section-tag blue">04 / Buttons</div>
+    <div class="btn-row">
+      <button class="btn-primary">Primary Blue</button>
+      <button class="btn-orange">Futures Orange</button>
+      <button class="btn-ghost">Ghost</button>
+    </div>
+    <div style="margin-top:20px;">
+      <table class="token-table">
+        <tr><th>Variant</th><th>Background</th><th>Text</th><th>Radius</th><th>Padding</th></tr>
+        <tr><td>Primary</td><td>#4250EB</td><td>#FFFFFF</td><td>12px</td><td>14px 28px</td></tr>
+        <tr><td>Orange</td><td>#F97316</td><td>#FFFFFF</td><td>12px</td><td>14px 28px</td></tr>
+        <tr><td>Ghost</td><td>transparent</td><td>#F0F2F5</td><td>12px</td><td>14px 28px</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 05 BADGES -->
+  <div class="section">
+    <div class="section-tag blue">05 / Badges & Tags</div>
+    <div class="badge-row">
+      <span class="badge badge-blue">FX</span>
+      <span class="badge badge-orange">Futures</span>
+      <span class="badge badge-ghost-blue">1-Step</span>
+      <span class="badge badge-ghost-orange">2-Step</span>
+    </div>
+    <div style="margin-top:20px;">
+      <div class="badge-row">
+        <span style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:100px;background:rgba(66,80,235,0.15);color:var(--blue);">Tag Blue</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:100px;background:rgba(249,115,22,0.15);color:var(--orange);">Tag Orange</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:100px;background:rgba(34,197,94,0.12);color:#22c55e;">Tag Green</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 CARDS -->
+  <div class="section">
+    <div class="section-tag blue">06 / Cards</div>
+    <div class="comp-grid">
+      <div class="offer-panel offer-panel-blue">
+        <div class="panel-type blue">FX 2-Step</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:10px;">
+          <div class="panel-hero-num">$25K</div>
+          <div class="panel-hero-label blue">Account</div>
+        </div>
+        <div style="font-size:13px;color:var(--muted);">Challenge Fee from <strong style="color:var(--text);">$19</strong></div>
+      </div>
+      <div class="offer-panel offer-panel-orange">
+        <div class="panel-type orange">Futures</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:10px;">
+          <div class="panel-hero-num">$50K</div>
+          <div class="panel-hero-label orange">Account</div>
+        </div>
+        <div style="font-size:13px;color:var(--muted);">Challenge Fee from <strong style="color:var(--text);">$89</strong></div>
+      </div>
+      <div class="comp-card neutral">
+        <div class="comp-label">Neutral Card</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.7;">Used for rule modifiers, reference tables, and info blocks that aren't tied to a specific challenge type.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 BACKGROUNDS & EFFECTS -->
+  <div class="section">
+    <div class="section-tag blue">07 / Backgrounds & Effects</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;">
+      <div>
+        <div style="font-size:10px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Blue Glow</div>
+        <div class="glow-demo"><div class="glow-blob"></div></div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Orange Glow</div>
+        <div class="glow-demo"><div class="glow-blob orange"></div></div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Grid Texture</div>
+        <div class="grid-texture-demo"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 SPACING -->
+  <div class="section">
+    <div class="section-tag blue">08 / Spacing Scale</div>
+    <div class="spacing-grid">
+      <div class="spacing-row"><div class="spacing-meta">4px — --space-4</div><div class="spacing-bar" style="width:4px;"></div></div>
+      <div class="spacing-row"><div class="spacing-meta">8px — --space-8</div><div class="spacing-bar" style="width:8px;"></div></div>
+      <div class="spacing-row"><div class="spacing-meta">12px — --space-12</div><div class="spacing-bar" style="width:12px;"></div></div>
+      <div class="spacing-row"><div class="spacing-meta">16px — --space-16</div><div class="spacing-bar" style="width:16px;"></div></div>
+      <div class="spacing-row"><div class="spacing-meta">20px — --space-20</div><div class="spacing-bar" style="width:20px;"></div></div>
+      <div class="spacing-row"><div class="spacing-meta">24px — --space-24</div><div class="spacing-bar" style="width:24px;"></div></div>
+      <div class="spacing-row"><div class="spacing-meta">32px — --space-32</div><div class="spacing-bar" style="width:32px;"></div></div>
+      <div class="spacing-row"><div class="spacing-meta">48px — --space-48</div><div class="spacing-bar" style="width:48px;"></div></div>
+      <div class="spacing-row"><div class="spacing-meta">64px — --space-64</div><div class="spacing-bar" style="width:64px;"></div></div>
+    </div>
+  </div>
+
+  <!-- 09 BORDER RADIUS -->
+  <div class="section">
+    <div class="section-tag blue">09 / Border Radius</div>
+    <div class="radius-grid">
+      <div><div class="radius-demo" style="border-radius:8px;"></div><div class="radius-label">8px<br>--radius-sm</div></div>
+      <div><div class="radius-demo" style="border-radius:12px;"></div><div class="radius-label">12px<br>--radius-md</div></div>
+      <div><div class="radius-demo" style="border-radius:18px;"></div><div class="radius-label">18px<br>--radius-lg</div></div>
+      <div><div class="radius-demo" style="border-radius:20px;"></div><div class="radius-label">20px<br>--radius-xl</div></div>
+      <div><div class="radius-demo" style="border-radius:100px;width:120px;height:44px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);"></div><div class="radius-label">100px<br>--radius-pill</div></div>
+    </div>
+  </div>
+
+  <!-- 10 CSS TOKENS REFERENCE -->
+  <div class="section">
+    <div class="section-tag blue">10 / CSS Token Reference</div>
+    <table class="token-table">
+      <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      <tr><td>--blue</td><td>#4250EB</td><td>Primary brand, FX challenge accent</td></tr>
+      <tr><td>--blue-dark</td><td>#2E3A8A</td><td>Hover states, dark blue glow</td></tr>
+      <tr><td>--orange</td><td>#F97316</td><td>Futures challenge accent, disruption angles</td></tr>
+      <tr><td>--bg</td><td>#06080C</td><td>Page background</td></tr>
+      <tr><td>--card</td><td>rgba(255,255,255,0.03)</td><td>Neutral card background</td></tr>
+      <tr><td>--card-blue</td><td>rgba(66,80,235,0.07)</td><td>FX card background</td></tr>
+      <tr><td>--card-orange</td><td>rgba(249,115,22,0.07)</td><td>Futures card background</td></tr>
+      <tr><td>--border</td><td>rgba(255,255,255,0.07)</td><td>Neutral border</td></tr>
+      <tr><td>--border-blue</td><td>rgba(66,80,235,0.28)</td><td>FX card border</td></tr>
+      <tr><td>--border-org</td><td>rgba(249,115,22,0.28)</td><td>Futures card border</td></tr>
+      <tr><td>--text</td><td>#F0F2F5</td><td>Primary body text</td></tr>
+      <tr><td>--muted</td><td>#8892A2</td><td>Secondary text, descriptions</td></tr>
+      <tr><td>--dim</td><td>#4A5568</td><td>Section tags, labels, tertiary text</td></tr>
+      <tr><td>--font</td><td>'Clash Display', sans-serif</td><td>All type — no exceptions</td></tr>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

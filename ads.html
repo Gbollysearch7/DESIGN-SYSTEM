@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradersYard — Ad Gallery</title>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@300,400,500,600,700&display=swap">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --blue:#4250EB;--blue-dark:#2E3A8A;--orange:#F97316;
+  --bg:#06080C;--card:rgba(255,255,255,0.03);
+  --card-blue:rgba(66,80,235,0.07);--card-orange:rgba(249,115,22,0.07);
+  --border:rgba(255,255,255,0.07);--border-blue:rgba(66,80,235,0.28);
+  --border-org:rgba(249,115,22,0.28);
+  --text:#F0F2F5;--muted:#8892A2;--dim:#4A5568;
+  --font:'Clash Display',sans-serif;
+}
+body{background:var(--bg);font-family:var(--font);color:var(--text);min-height:100vh;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(6,8,12,0.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:64px;
+}
+.nav-logo{font-size:20px;font-weight:700;letter-spacing:-0.5px;}
+.nav-logo span{color:var(--blue);}
+.nav-links{display:flex;gap:4px;}
+.nav-links a{
+  color:var(--muted);font-size:13px;font-weight:600;
+  padding:8px 16px;border-radius:8px;text-decoration:none;
+  transition:all 0.15s;letter-spacing:0.2px;
+}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.05);}
+.nav-links a.active{color:var(--blue);background:rgba(66,80,235,0.12);}
+.nav-cta{
+  background:var(--blue);color:#fff;
+  font-size:13px;font-weight:700;letter-spacing:0.5px;
+  padding:10px 20px;border-radius:10px;text-decoration:none;
+  transition:opacity 0.15s;
+}
+.nav-cta:hover{opacity:0.85;}
+
+/* PAGE */
+.page{padding:100px 48px 80px;max-width:1400px;margin:0 auto;}
+.page-header{margin-bottom:64px;}
+.page-header-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:14px;}
+.page-header-title{font-size:52px;font-weight:700;letter-spacing:-2.5px;line-height:1;margin-bottom:16px;}
+.page-header-title span{color:var(--blue);}
+.page-header-sub{font-size:16px;color:var(--muted);max-width:560px;line-height:1.6;}
+
+/* FILTER BAR */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:48px;}
+.filter-btn{
+  font-family:var(--font);font-size:12px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:8px 18px;border-radius:100px;cursor:pointer;
+  border:1px solid var(--border);background:transparent;color:var(--muted);
+  transition:all 0.15s;
+}
+.filter-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
+.filter-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+.filter-btn.orange.active{background:var(--orange);border-color:var(--orange);}
+
+/* AD GRID */
+.ad-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:20px;
+}
+.ad-card{
+  background:var(--card-blue);border:1px solid var(--border-blue);
+  border-radius:16px;overflow:hidden;
+  transition:transform 0.15s;cursor:pointer;
+}
+.ad-card:hover{transform:translateY(-3px);}
+.ad-card.orange-card{background:var(--card-orange);border-color:var(--border-org);}
+.ad-card.neutral-card{background:var(--card);border-color:var(--border);}
+
+.ad-thumb{
+  width:100%;aspect-ratio:1/1;background:#0d1018;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;position:relative;
+}
+.ad-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.ad-thumb-placeholder{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;padding:24px;text-align:center;height:100%;
+}
+.ad-thumb-num{font-size:48px;font-weight:700;letter-spacing:-2px;opacity:0.15;}
+.ad-thumb-icon{font-size:32px;opacity:0.3;}
+
+.ad-meta{padding:20px;}
+.ad-num{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.ad-title{font-size:16px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px;line-height:1.2;}
+.ad-title.blue{color:var(--blue);}
+.ad-title.orange{color:var(--orange);}
+.ad-angle{font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5;}
+.ad-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.ad-tag{
+  font-size:9px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;padding:4px 10px;
+  border-radius:100px;
+}
+.ad-tag.blue{background:rgba(66,80,235,0.15);color:var(--blue);}
+.ad-tag.orange{background:rgba(249,115,22,0.15);color:var(--orange);}
+.ad-tag.green{background:rgba(34,197,94,0.12);color:#22c55e;}
+.ad-tag.purple{background:rgba(168,85,247,0.15);color:#a855f7;}
+
+/* FORMAT BADGE */
+.ad-format{
+  position:absolute;top:12px;right:12px;
+  font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  background:rgba(6,8,12,0.7);color:var(--muted);
+  padding:4px 10px;border-radius:100px;
+  border:1px solid var(--border);
+}
+
+/* SECTION DIVIDER */
+.gallery-section{margin-bottom:60px;}
+.gallery-section-tag{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--dim);
+  border-bottom:1px solid var(--border);
+  padding-bottom:14px;margin-bottom:32px;
+}
+.gallery-section-tag.blue{color:var(--blue);border-color:var(--border-blue);}
+.gallery-section-tag.orange{color:var(--orange);border-color:var(--border-org);}
+
+/* STATS BAR */
+.stats-bar{
+  display:flex;gap:32px;padding:24px 32px;
+  background:var(--card-blue);border:1px solid var(--border-blue);
+  border-radius:16px;margin-bottom:48px;flex-wrap:wrap;
+}
+.stats-item{text-align:center;}
+.stats-num{font-size:28px;font-weight:700;letter-spacing:-1px;color:var(--blue);}
+.stats-label{font-size:11px;color:var(--muted);margin-top:2px;letter-spacing:0.5px;}
+
+/* EMPTY STATE */
+.empty-state{
+  grid-column:1/-1;text-align:center;padding:80px 40px;
+  color:var(--dim);font-size:14px;
+}
+
+/* LIGHTBOX */
+#lightbox{
+  position:fixed;inset:0;z-index:999;
+  background:rgba(6,8,12,0.92);backdrop-filter:blur(12px);
+  display:none;align-items:center;justify-content:center;
+  padding:24px;
+}
+#lightbox.open{display:flex;}
+.lb-inner{
+  max-width:600px;width:100%;
+  background:var(--card-blue);border:1px solid var(--border-blue);
+  border-radius:20px;overflow:hidden;
+}
+.lb-img{width:100%;display:block;}
+.lb-meta{padding:24px;}
+.lb-title{font-size:20px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px;}
+.lb-angle{font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6;}
+.lb-close{
+  position:absolute;top:24px;right:24px;
+  background:rgba(255,255,255,0.08);border:1px solid var(--border);
+  color:var(--text);font-size:18px;width:40px;height:40px;
+  border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font);font-weight:700;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Traders<span>Yard</span></div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="pricing.html">Pricing Cards</a>
+    <a href="design-system.html">Design System</a>
+    <a href="ad-angles.html">Ad Angles</a>
+    <a href="ads.html" class="active">Ad Gallery</a>
+  </div>
+  <a href="pricing.html" class="nav-cta">View All Challenges →</a>
+</nav>
+
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-header-label">Creative Library</div>
+    <div class="page-header-title">Ad <span>Gallery</span></div>
+    <div class="page-header-sub">All 25 Meta ad creatives. Each one built around a specific angle, audience, and format.</div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stats-item"><div class="stats-num">25</div><div class="stats-label">Total Creatives</div></div>
+    <div class="stats-item"><div class="stats-num">10</div><div class="stats-label">Angles Covered</div></div>
+    <div class="stats-item"><div class="stats-num">3</div><div class="stats-label">Formats</div></div>
+    <div class="stats-item"><div class="stats-num">FX + Futures</div><div class="stats-label">Products</div></div>
+    <div class="stats-item"><div class="stats-num">Meta</div><div class="stats-label">Platform</div></div>
+  </div>
+
+  <!-- BATCH 1: FOUNDATION -->
+  <div class="gallery-section">
+    <div class="gallery-section-tag blue">Batch 01 — Foundation (Ad 01–10)</div>
+    <div class="ad-grid" id="batch1">
+
+      <div class="ad-card" onclick="openLightbox('ad01')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">01</div>
+            <div style="font-size:13px;color:var(--muted);">Product Hero</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 01</div>
+          <div class="ad-title blue">Where Demo Wins Become Real Rewards</div>
+          <div class="ad-angle">TradersYard product hero shot. Brand blue, clean, premium. Product mockup front and center.</div>
+          <div class="ad-tags">
+            <span class="ad-tag blue">Product Hero</span>
+            <span class="ad-tag blue">Cold Traffic</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad02')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">02</div>
+            <div style="font-size:13px;color:var(--muted);">Social Proof</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 02</div>
+          <div class="ad-title blue">20,000+ Funded Traders</div>
+          <div class="ad-angle">Numbers-first creative. Big social proof stat as the visual anchor. Star rating, payout speed.</div>
+          <div class="ad-tags">
+            <span class="ad-tag blue">Social Proof</span>
+            <span class="ad-tag green">20K+</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad03')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1350</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">03</div>
+            <div style="font-size:13px;color:var(--muted);">Lifestyle — Male</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 03</div>
+          <div class="ad-title blue">The Market Never Sleeps</div>
+          <div class="ad-angle">Aspirational lifestyle. Young Black male trader, luxury home setup, multiple screens.</div>
+          <div class="ad-tags">
+            <span class="ad-tag blue">Lifestyle</span>
+            <span class="ad-tag blue">Aspiration</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad04')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1350</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">04</div>
+            <div style="font-size:13px;color:var(--muted);">Lifestyle — Female</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 04</div>
+          <div class="ad-title blue">She Passed the Challenge. First Try.</div>
+          <div class="ad-angle">Young Black female trader in a professional setup. Breaking stereotypes, showing confidence.</div>
+          <div class="ad-tags">
+            <span class="ad-tag blue">Lifestyle</span>
+            <span class="ad-tag purple">Female Audience</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-card orange-card" onclick="openLightbox('ad05')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--orange);">05</div>
+            <div style="font-size:13px;color:var(--muted);">Before / After</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 05</div>
+          <div class="ad-title orange">Before TY. After TY.</div>
+          <div class="ad-angle">Split screen. Left: stressed trader at desk. Right: same trader, funded, confident, thriving.</div>
+          <div class="ad-tags">
+            <span class="ad-tag orange">Before/After</span>
+            <span class="ad-tag orange">Transformation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-card orange-card" onclick="openLightbox('ad06')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1920</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--orange);">06</div>
+            <div style="font-size:13px;color:var(--muted);">Futures Hero</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 06</div>
+          <div class="ad-title orange">Futures. Now From $89.</div>
+          <div class="ad-angle">Futures-specific orange theme. Dynamic trading charts, energy, momentum. Stories format.</div>
+          <div class="ad-tags">
+            <span class="ad-tag orange">Futures</span>
+            <span class="ad-tag orange">Stories</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad07')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">07</div>
+            <div style="font-size:13px;color:var(--muted);">Value Prop</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 07</div>
+          <div class="ad-title blue">Up to 100% Profit Split</div>
+          <div class="ad-angle">Big number creative. 100% split front and center. Premium, clean, financial brand feel.</div>
+          <div class="ad-tags">
+            <span class="ad-tag blue">Value Prop</span>
+            <span class="ad-tag green">100% Split</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad08')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1920</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">08</div>
+            <div style="font-size:13px;color:var(--muted);">Urgency</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 08</div>
+          <div class="ad-title blue">Price Goes Up Tomorrow</div>
+          <div class="ad-angle">Limited time angle. Clock imagery, urgency, scarcity. Stories format. Direct response.</div>
+          <div class="ad-tags">
+            <span class="ad-tag blue">Urgency</span>
+            <span class="ad-tag blue">Stories</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad09')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">09</div>
+            <div style="font-size:13px;color:var(--muted);">Minimal Stories</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 09</div>
+          <div class="ad-title blue">Start From $19</div>
+          <div class="ad-angle">Ultra-clean minimal ad. Just the price, the logo, the CTA. Nothing else. Brand blue bg.</div>
+          <div class="ad-tags">
+            <span class="ad-tag blue">Minimal</span>
+            <span class="ad-tag green">Price Hook</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-card orange-card" onclick="openLightbox('ad10')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1350</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--orange);">10</div>
+            <div style="font-size:13px;color:var(--muted);">Arena Tournament</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 10</div>
+          <div class="ad-title orange">The Arena. Win Real Capital.</div>
+          <div class="ad-angle">Tournament creative. Competitive energy, prize pool, leaderboard vibes. Orange fire aesthetic.</div>
+          <div class="ad-tags">
+            <span class="ad-tag orange">Tournament</span>
+            <span class="ad-tag orange">Arena</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BATCH 2: AUTONOMY/CONTROL ANGLES -->
+  <div class="gallery-section">
+    <div class="gallery-section-tag blue">Batch 02 — Control & Autonomy Angles (Ad 11–25)</div>
+    <div class="ad-grid" id="batch2">
+
+      <div class="ad-card" onclick="openLightbox('ad11')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">11</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 11</div>
+          <div class="ad-title blue">You Are In Charge</div>
+          <div class="ad-angle">Confidence and control. Trader at the helm. Your rules, your account, your call.</div>
+          <div class="ad-tags"><span class="ad-tag blue">Autonomy</span><span class="ad-tag blue">Control</span></div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad12')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">12</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 12</div>
+          <div class="ad-title blue">Build Your Challenge</div>
+          <div class="ad-angle">Configurator angle. Build from $8. Choose your size, rules, speed. Live price updates.</div>
+          <div class="ad-tags"><span class="ad-tag blue">Configurator</span><span class="ad-tag green">$8 Hook</span></div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad13')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1350</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">13</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 13</div>
+          <div class="ad-title blue">Build Your Own Way</div>
+          <div class="ad-angle">Independence angle. No template. No one-size-fits-all. Your challenge, your path.</div>
+          <div class="ad-tags"><span class="ad-tag blue">Autonomy</span><span class="ad-tag blue">Disruption</span></div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad14')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">14</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 14</div>
+          <div class="ad-title blue">Tweak The Rules</div>
+          <div class="ad-angle">Toggle consistency. Raise profit target. Drop your price. Every tweak updates live.</div>
+          <div class="ad-tags"><span class="ad-tag blue">Configurator</span><span class="ad-tag blue">Warm Traffic</span></div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad15')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">15</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 15</div>
+          <div class="ad-title blue">The Ball Is In Your Court</div>
+          <div class="ad-angle">You pick the account. You set the rules. You decide payout speed. Nobody tells you how to trade.</div>
+          <div class="ad-tags"><span class="ad-tag blue">Autonomy</span><span class="ad-tag blue">Cold Traffic</span></div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad16')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1920</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">16</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 16</div>
+          <div class="ad-title blue">You Set The Terms</div>
+          <div class="ad-angle">Contract energy. You write the deal. Stories format, bold text, confident body language.</div>
+          <div class="ad-tags"><span class="ad-tag blue">Autonomy</span><span class="ad-tag blue">Stories</span></div>
+        </div>
+      </div>
+
+      <div class="ad-card orange-card" onclick="openLightbox('ad17')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--orange);">17</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 17</div>
+          <div class="ad-title orange">No One Size Fits All</div>
+          <div class="ad-angle">Disruption angle. Every other prop firm gives you one option. TY gives you infinite builds.</div>
+          <div class="ad-tags"><span class="ad-tag orange">Disruption</span><span class="ad-tag orange">Competitor</span></div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad18')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1350</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">18</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 18</div>
+          <div class="ad-title blue">Her Account. Her Rules.</div>
+          <div class="ad-angle">Female-targeted autonomy angle. Empowered Black female trader, confident and in control.</div>
+          <div class="ad-tags"><span class="ad-tag blue">Autonomy</span><span class="ad-tag purple">Female Audience</span></div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad19')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">19</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 19</div>
+          <div class="ad-title blue">What Would You Change?</div>
+          <div class="ad-angle">Curiosity hook. Invites audience into the configurator. Interactive, questioning tone.</div>
+          <div class="ad-tags"><span class="ad-tag blue">Curiosity</span><span class="ad-tag blue">Engagement</span></div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad20')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">20</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 20</div>
+          <div class="ad-title blue">Most Funded Traders Do This</div>
+          <div class="ad-angle">Social proof + tip angle. Authority positioning. Funded traders use the configurator.</div>
+          <div class="ad-tags"><span class="ad-tag blue">Social Proof</span><span class="ad-tag blue">Authority</span></div>
+        </div>
+      </div>
+
+      <div class="ad-card orange-card" onclick="openLightbox('ad21')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--orange);">21</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 21</div>
+          <div class="ad-title orange">Make It Harder. Pay Less.</div>
+          <div class="ad-angle">Counterintuitive hook. Higher profit target = cheaper challenge. Scroll-stopper math.</div>
+          <div class="ad-tags"><span class="ad-tag orange">Curiosity</span><span class="ad-tag orange">Scroll Stopper</span></div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad22')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1920</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">22</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 22</div>
+          <div class="ad-title blue">Your Yard. Your Speed. Your Call.</div>
+          <div class="ad-angle">Triple autonomy stack. Name, payout speed, rules. Everything yours. Stories format.</div>
+          <div class="ad-tags"><span class="ad-tag blue">Autonomy</span><span class="ad-tag blue">Stories</span></div>
+        </div>
+      </div>
+
+      <div class="ad-card orange-card" onclick="openLightbox('ad23')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--orange);">23</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 23</div>
+          <div class="ad-title orange">Don't Like The Rules? Change Them.</div>
+          <div class="ad-angle">Direct disruption. No other prop firm lets you do this. Bold, confrontational energy.</div>
+          <div class="ad-tags"><span class="ad-tag orange">Disruption</span><span class="ad-tag orange">Competitor</span></div>
+        </div>
+      </div>
+
+      <div class="ad-card" onclick="openLightbox('ad24')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1350</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--blue);">24</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 24</div>
+          <div class="ad-title blue">His Account. His Terms.</div>
+          <div class="ad-angle">Male-targeted autonomy angle. Confident Black male trader setting his own conditions.</div>
+          <div class="ad-tags"><span class="ad-tag blue">Autonomy</span><span class="ad-tag blue">Male Audience</span></div>
+        </div>
+      </div>
+
+      <div class="ad-card orange-card" onclick="openLightbox('ad25')">
+        <div class="ad-thumb">
+          <div class="ad-format">1080×1080</div>
+          <div class="ad-thumb-placeholder">
+            <div class="ad-thumb-num" style="color:var(--orange);">25</div>
+          </div>
+        </div>
+        <div class="ad-meta">
+          <div class="ad-num">Ad 25</div>
+          <div class="ad-title orange">The Harder You Go. The Less You Pay.</div>
+          <div class="ad-angle">Extended version of the counterintuitive pricing angle. Stack difficulty, drop the cost.</div>
+          <div class="ad-tags"><span class="ad-tag orange">Curiosity</span><span class="ad-tag green">$8 Hook</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox(event)">
+  <button class="lb-close" onclick="closeLightbox()">×</button>
+  <div class="lb-inner" id="lb-content"></div>
+</div>
+
+<script>
+const adData = {
+  ad01:{title:"Where Demo Wins Become Real Rewards",angle:"Product hero shot. Brand blue, clean, premium. The TradersYard platform as the star.",format:"1080×1080"},
+  ad02:{title:"20,000+ Funded Traders",angle:"Social proof-first creative. Big stat as the visual anchor. Star rating and payout speed.",format:"1080×1080"},
+  ad03:{title:"The Market Never Sleeps",angle:"Lifestyle — male. Young Black trader, luxury setup, multiple screens, aspirational.",format:"1080×1350"},
+  ad04:{title:"She Passed the Challenge. First Try.",angle:"Lifestyle — female. Breaking stereotypes, professional setup, confidence.",format:"1080×1350"},
+  ad05:{title:"Before TY. After TY.",angle:"Split screen. Left: stressed trader. Right: same trader, funded, thriving.",format:"1080×1080"},
+  ad06:{title:"Futures. Now From $89.",angle:"Futures-specific orange theme. Dynamic charts, energy, momentum. Stories format.",format:"1080×1920"},
+  ad07:{title:"Up to 100% Profit Split",angle:"Big number creative. 100% split front and center. Clean financial brand feel.",format:"1080×1080"},
+  ad08:{title:"Price Goes Up Tomorrow",angle:"Urgency — limited time. Clock imagery, scarcity. Stories format, direct response.",format:"1080×1920"},
+  ad09:{title:"Start From $19",angle:"Ultra-clean minimal ad. Just the price, the logo, the CTA. Brand blue background.",format:"1080×1080"},
+  ad10:{title:"The Arena. Win Real Capital.",angle:"Tournament creative. Competitive energy, prize pool, leaderboard. Orange fire aesthetic.",format:"1080×1350"},
+  ad11:{title:"You Are In Charge",angle:"Confidence and control. Trader at the helm. Your rules, your account, your call.",format:"1080×1080"},
+  ad12:{title:"Build Your Challenge",angle:"Configurator angle. Build from $8. Choose your size, rules, payout speed.",format:"1080×1080"},
+  ad13:{title:"Build Your Own Way",angle:"No template. No one-size-fits-all. Your challenge, your path, your way.",format:"1080×1350"},
+  ad14:{title:"Tweak The Rules",angle:"Toggle consistency. Raise profit target. Drop your price. Every tweak updates live.",format:"1080×1080"},
+  ad15:{title:"The Ball Is In Your Court",angle:"You pick the account. You set the rules. Nobody tells you how to trade here.",format:"1080×1080"},
+  ad16:{title:"You Set The Terms",angle:"Contract energy. You write the deal. Stories format with bold confident body language.",format:"1080×1920"},
+  ad17:{title:"No One Size Fits All",angle:"Every other prop firm gives you one option. TradersYard gives you infinite builds.",format:"1080×1080"},
+  ad18:{title:"Her Account. Her Rules.",angle:"Female-targeted autonomy angle. Empowered Black female trader, confident and in control.",format:"1080×1350"},
+  ad19:{title:"What Would You Change?",angle:"Curiosity hook. Invites audience into the configurator. Interactive, questioning tone.",format:"1080×1080"},
+  ad20:{title:"Most Funded Traders Do This",angle:"Social proof + tip angle. Authority positioning. Funded traders use the configurator to build smarter.",format:"1080×1080"},
+  ad21:{title:"Make It Harder. Pay Less.",angle:"Counterintuitive hook. Higher profit target = cheaper challenge. Scroll-stopper math.",format:"1080×1080"},
+  ad22:{title:"Your Yard. Your Speed. Your Call.",angle:"Triple autonomy stack. Your name, your payout speed, your rules. Stories format.",format:"1080×1920"},
+  ad23:{title:"Don't Like The Rules? Change Them.",angle:"Direct disruption. No other prop firm lets you do this. Bold and confrontational.",format:"1080×1080"},
+  ad24:{title:"His Account. His Terms.",angle:"Male-targeted autonomy angle. Confident Black male trader setting his own conditions.",format:"1080×1350"},
+  ad25:{title:"The Harder You Go. The Less You Pay.",angle:"Extended counterintuitive pricing angle. Stack difficulty, drop the cost. Down to $8.",format:"1080×1080"},
+};
+
+function openLightbox(id){
+  const d=adData[id];
+  if(!d)return;
+  const num=id.replace('ad','');
+  document.getElementById('lb-content').innerHTML=`
+    <div class="ad-thumb" style="aspect-ratio:1/1;background:#0d1018;min-height:300px;">
+      <div class="ad-thumb-placeholder">
+        <div class="ad-thumb-num" style="color:var(--blue);font-size:80px;">${num.padStart(2,'0')}</div>
+        <div style="font-size:14px;color:var(--muted);">${d.format}</div>
+      </div>
+    </div>
+    <div class="lb-meta">
+      <div style="font-size:10px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Ad ${num.padStart(2,'0')}</div>
+      <div class="lb-title">${d.title}</div>
+      <div class="lb-angle">${d.angle}</div>
+      <div style="font-size:11px;color:var(--dim);">Format: ${d.format}</div>
+    </div>
+  `;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(e){
+  if(!e||e.target===document.getElementById('lightbox')||e.target.classList.contains('lb-close')){
+    document.getElementById('lightbox').classList.remove('open');
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+</script>
+</body>
+</html>
